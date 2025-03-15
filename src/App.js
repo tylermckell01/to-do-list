@@ -7,7 +7,8 @@ function App() {
   const [taskName, setTaskName] = useState("");
 
   // submit new task
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const response = await fetch('http://127.0.0.1:5000/task', {
         method: 'POST',
@@ -27,6 +28,7 @@ function App() {
     } catch (error) {
       console.error('Error adding task:', error);
     }
+    setTaskName("")
   };
   
 
@@ -43,7 +45,7 @@ function App() {
               onChange={(e) => setTaskName(e.target.value)}
             />
           </label>
-          <input type='submit' />
+          <input type='submit' value="Add Task" />
         </form>
       </div>
       <AllTasks
