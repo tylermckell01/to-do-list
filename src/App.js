@@ -7,30 +7,28 @@ function App() {
   const [taskName, setTaskName] = useState("");
 
   // submit new task
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // alert(`the name you entered was: ${taskName}`);
-    try{
-      const response = await fetch("http://127.0.0.1:5000/task", {
-        method: "POST",
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/task', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({task_name: taskName}),
+        body: JSON.stringify({ task_name: taskName }),
+        mode: 'cors' 
       });
-
+  
       if (!response.ok) {
-        throw new Error("Failed to add task");
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      const newTask = await response.json();
-      console.log("Task added:", newTask);
-
-      setTaskName("");
+  
+      const data = await response.json();
+      console.log('Success:', data);
     } catch (error) {
-      console.error("Error adding task:", error)
+      console.error('Error adding task:', error);
     }
   };
+  
 
   return (
     <div className="App">

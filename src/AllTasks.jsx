@@ -10,7 +10,6 @@ function AllTasks(handleSubmit) {
     const [taskOrder, setTaskOrder] = useState("");
 
 
-
     // fetch all tasks function
     const fetchTasks = () => {
         fetch("http://127.0.0.1:5000/tasks")
@@ -104,13 +103,12 @@ function AllTasks(handleSubmit) {
         (console.log(allTasks));
 
     }
-
     const filteredTasks = 
-        taskOrder !== "Filter by"
-        ? allTasks.filter((task) => 
+        taskOrder === "All Tasks"
+        ? allTasks
+        : allTasks.filter((task) => 
             task.task_status.toLowerCase().includes(taskOrder.toLowerCase())
-        )
-        : allTasks;
+        );
 
     
 
@@ -118,7 +116,7 @@ function AllTasks(handleSubmit) {
     <div className="App">
         <h1>Here are all your tasks</h1>
         <select value={taskOrder} onChange={(e) => filterTasks(e)}>
-            <option value="Filter By">Filter by</option>
+            <option value="All Tasks">All Tasks</option>
             <option value="New">New</option>
             <option value="In Progress">In Progress</option>
             <option value="Complete">Complete</option>
@@ -136,7 +134,7 @@ function AllTasks(handleSubmit) {
                         <select value={editedTaskStatus} onChange={(e) => setEditedTaskStatus(e.target.value)}>
                             <option value="New">New</option>
                             <option value="In Progress">In Progress</option>
-                            <option value="Complete">Completed</option>
+                            <option value="Complete">Complete</option>
                         </select>
                         <button onClick={() => handleSaveClick(editingTaskId)}>Save</button>
                         <button onClick={() => setEditingTaskId(null)}>Cancel</button>
