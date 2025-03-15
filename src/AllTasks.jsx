@@ -1,7 +1,9 @@
-import './styles/App.css';
+import './styles/App.scss';
 import { useState, useEffect } from 'react';
 
+
 function AllTasks(handleSubmit) {
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const [allTasks, setAllTasks] = useState([]);
     const [editingTaskId, setEditingTaskId] = useState(null);
@@ -12,7 +14,7 @@ function AllTasks(handleSubmit) {
 
     // fetch all tasks function
     const fetchTasks = () => {
-        fetch("http://127.0.0.1:5000/tasks")
+        fetch(`${API_URL}/tasks`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error("failed to fetch all tasks")
@@ -25,14 +27,14 @@ function AllTasks(handleSubmit) {
 
     // fetch all tasks on any task updates useeffect
     useEffect(() => {
-        fetchTasks()
+        fetchTasks();
     }, [handleSubmit]);
 
     // Update task
     const updateTask = async () => {
     
         try {
-            const response = await fetch(`http://127.0.0.1:5000/task/${editingTaskId}`, {
+            const response = await fetch(`${API_URL}/task/${editingTaskId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +65,7 @@ function AllTasks(handleSubmit) {
         console.log(taskId)
     
         try {
-            const response = await fetch(`http://127.0.0.1:5000/task/${taskId}`, {
+            const response = await fetch(`${API_URL}/task/${taskId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

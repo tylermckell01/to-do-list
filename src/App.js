@@ -1,8 +1,9 @@
 import AllTasks from './AllTasks';
-import './styles/App.css';
+import './styles/App.scss';
 import { useState } from 'react';
 
 function App() {
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const [taskName, setTaskName] = useState("");
 
@@ -10,7 +11,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://127.0.0.1:5000/task', {
+      const response = await fetch(`${API_URL}/task`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
