@@ -17,7 +17,7 @@ function App() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ task_name: taskName }),
-        mode: 'no-cors'
+        // mode: 'no-cors'
       });
   
       if (!response.ok) {

@@ -43,7 +43,7 @@ function AllTasks(handleSubmit) {
                     task_name: editedTaskName, 
                     task_status: editedTaskStatus
                 }),
-                mode: 'no-cors'
+                // mode: 'no-cors'
             });
     
             if (!response.ok) {
@@ -71,7 +71,7 @@ function AllTasks(handleSubmit) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                mode: 'no-cors'
+                // mode: 'no-cors'
             });
     
             if (!response.ok) {
